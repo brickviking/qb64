@@ -261,7 +261,7 @@ DIM SHARED tempfolderindex
 
 IF INSTR(_OS$, "LINUX") THEN
     fh = FREEFILE
-    OPEN ".\internal\temp\tempfoldersearch.bin" FOR RANDOM AS #fh LEN = LEN(tempfolderindex)
+    OPEN "./internal/temp/tempfoldersearch.bin" FOR RANDOM AS #fh LEN = LEN(tempfolderindex)
     tempfolderrecords = LOF(fh) / LEN(tempfolderindex)
     i = 1
     IF tempfolderrecords = 0 THEN
