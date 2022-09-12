@@ -84,7 +84,13 @@ echo Testing for 7zip
 if ERRORLEVEL 9009 (
 
     echo Downloading 7zr.exe...
-    curl -L https://www.7-zip.org/a/7zr.exe -o 7zr.exe
+	rem Check for XP (either 32-bit or 64-bit)
+	ver | findstr /R /C:"Version 5.[12]"
+	if errorlevel 0 (
+        curl -Lk https://www.7-zip.org/a/7zr.exe -o 7zr.exe
+    ) else (
+        curl -L https://www.7-zip.org/a/7zr.exe -o 7zr.exe
+	)
 
     echo Extracting C++ Compiler...
     7zr.exe x temp.7z -y
