@@ -78,18 +78,28 @@ goto chosen
 echo Downloading %url%...
 curl -L %url% -o temp.7z
 
-echo Downloading 7zr.exe...
-curl -L https://www.7-zip.org/a/7zr.exe -o 7zr.exe
+echo Testing for 7zip
+7z >NUL 2>&1
 
-echo Extracting C++ Compiler...
-7zr.exe x temp.7z -y
+if ERRORLEVEL 9009 (
+
+    echo Downloading 7zr.exe...
+    curl -L https://www.7-zip.org/a/7zr.exe -o 7zr.exe
+
+    echo Extracting C++ Compiler...
+    7zr.exe x temp.7z -y
+) else (
+    echo Extracting C++ Compiler...
+    7z x temp.7z -y
+)
 
 echo Moving C++ compiler...
 for /f %%a in ('dir %MINGW% /b') do move /y "%MINGW%\%%a" internal\c\c_compiler\
 
 echo Cleaning up..
 rd %MINGW%
-del 7zr.exe
+if exist 7zr.exe del 7zr.exe
+
 del temp.7z
 
 :skipccompsetup
