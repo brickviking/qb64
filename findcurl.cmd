@@ -15,7 +15,7 @@ rem Check if curl exists
 curl --version 2>NUL 1>&2
 
 
-if %ERRORLEVEL == 9009 (
+if %ERRORLEVEL% == 9009 (
 rem check if we have it already
     if exist internal\curl\curl.exe goto gotcurl
     mkdir internal\curl >NUL
