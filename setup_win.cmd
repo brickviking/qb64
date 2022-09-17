@@ -56,9 +56,9 @@ reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" 
 
 :choose
 if not exist %SystemRoot%\system32\choice.exe (
-    set /p errorlevel="Use (1) 64-bit or (2) 32-bit MINGW? "
+    set /p errorlevel="Install (1) 64-bit or (2) 32-bit MINGW? "
 ) else (
-    choice /c 12 /M "Use (1) 64-bit or (2) 32-bit MINGW? "
+    choice /c 12 /M "Download (1) 64-bit or (2) 32-bit MINGW? "
 )
 if errorlevel 1 goto chose64
 goto chose32
